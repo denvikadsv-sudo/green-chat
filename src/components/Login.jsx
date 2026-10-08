@@ -80,7 +80,7 @@ export default function Login({ onLogin, initialError = '' }) {
             <input
               value={apiUrl}
               onChange={(e) => setApiUrl(e.target.value)}
-              placeholder="https://1101.api.green-api.com"
+              placeholder="https://7107.api.greenapi.com"
             />
           </label>
         </details>

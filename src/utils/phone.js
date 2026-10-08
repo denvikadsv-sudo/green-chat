@@ -1,6 +1,6 @@
 export function resolveApiUrl(idInstance) {
   const id = String(idInstance || '').trim()
-  return id.length >= 10 ? `https://${id.slice(0, 4)}.api.green-api.com` : 'https://api.green-api.com'
+  return id.length >= 10 ? `https://${id.slice(0, 4)}.api.greenapi.com` : 'https://api.green-api.com'
 }
 
 // "+7 (999) 123-45-67" / "8 999 123 45 67" -> "79991234567"; returns null if not a plausible number

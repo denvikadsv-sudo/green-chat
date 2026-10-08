@@ -12,7 +12,7 @@ describe('helpers', () => {
   it('builds chatId', () => expect(toChatId('79991234567')).toBe('79991234567@c.us'))
   it('formats russian phone', () => expect(formatPhone('79991234567')).toBe('+7 999 123-45-67'))
   it('derives apiUrl from 10-digit instance', () =>
-    expect(resolveApiUrl('7103123456')).toBe('https://7103.api.green-api.com'))
+    expect(resolveApiUrl('7103123456')).toBe('https://7103.api.greenapi.com'))
   it('falls back to default apiUrl', () =>
     expect(resolveApiUrl('110012345')).toBe('https://api.green-api.com'))
 })

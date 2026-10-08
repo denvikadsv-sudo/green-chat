@@ -44,7 +44,7 @@ export default function App() {
     setAuthError('Сессия GREEN-API отклонена: проверьте idInstance и apiTokenInstance.')
   }, [])
 
-  const online = usePolling(hydrated ? creds : null, onEvent, onAuthError)
+  const pollError = usePolling(hydrated ? creds : null, onEvent, onAuthError)
 
   const send = useCallback(
     async (chatId, text) => {
@@ -100,7 +100,7 @@ export default function App() {
         chats={state.chats}
         messages={state.messages}
         activeId={state.activeId}
-        online={online}
+        pollError={pollError}
         idInstance={creds.idInstance}
         onSelect={(chatId) => dispatch({ type: 'SELECT', chatId })}
         onCreate={(chatId) => dispatch({ type: 'ADD_CHAT', chatId })}

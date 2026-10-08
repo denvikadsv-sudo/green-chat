@@ -10,7 +10,7 @@ const sleep = (ms, signal) =>
 
 // Long-polls GREEN-API receiveNotification -> onEvent -> deleteNotification, strictly in sequence.
 export function usePolling(creds, onEvent, onAuthError) {
-  const [online, setOnline] = useState(true)
+  const [error, setError] = useState('')
   const handlers = useRef({ onEvent, onAuthError })
   handlers.current = { onEvent, onAuthError }
 
@@ -23,7 +23,7 @@ export function usePolling(creds, onEvent, onAuthError) {
       while (!ctrl.signal.aborted) {
         try {
           const n = await receiveNotification(creds, ctrl.signal, 10)
-          setOnline(true)
+          setError('')
           backoff = 1000
           if (n && n.receiptId != null) {
             try {
@@ -40,7 +40,7 @@ export function usePolling(creds, onEvent, onAuthError) {
             handlers.current.onAuthError?.(e)
             break
           }
-          setOnline(false)
+          setError(e.message || 'Ошибка соединения')
           await sleep(backoff, ctrl.signal)
           backoff = Math.min(backoff * 2, 15000)
         }
@@ -50,5 +50,5 @@ export function usePolling(creds, onEvent, onAuthError) {
     return () => ctrl.abort()
   }, [creds])
 
-  return online
+  return error
 }

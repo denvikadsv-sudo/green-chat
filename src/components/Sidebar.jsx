@@ -3,7 +3,7 @@ import { normalizePhone, toChatId } from '../utils/phone.js'
 import { formatTime } from '../utils/time.js'
 import Avatar from './Avatar.jsx'
 
-export default function Sidebar({ chats, messages, activeId, online, idInstance, onSelect, onCreate, onLogout }) {
+export default function Sidebar({ chats, messages, activeId, pollError, idInstance, onSelect, onCreate, onLogout }) {
   const [adding, setAdding] = useState(false)
   const [phone, setPhone] = useState('')
   const [error, setError] = useState('')
@@ -27,8 +27,8 @@ export default function Sidebar({ chats, messages, activeId, online, idInstance,
           <Avatar name="Я" />
           <div>
             <div className="sidebar__title">Чаты</div>
-            <div className={`sidebar__status ${online ? '' : 'sidebar__status--off'}`}>
-              {online ? `Инстанс ${idInstance}` : 'Нет соединения…'}
+            <div className={`sidebar__status ${pollError ? 'sidebar__status--off' : ''}`}>
+              {pollError ? `Нет соединения: ${pollError}` : `Инстанс ${idInstance}`}
             </div>
           </div>
         </div>

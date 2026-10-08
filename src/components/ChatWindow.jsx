@@ -7,9 +7,14 @@ const MAX_LEN = 4000
 function Ticks({ status }) {
   if (status === 'pending') return <span className="tick tick--pending" title="Отправляется">🕓</span>
   const double = status === 'delivered' || status === 'read'
+  const titles = { sent: 'Отправлено', delivered: 'Доставлено', read: 'Прочитано' }
   return (
-    <svg className={`tick ${status === 'read' ? 'tick--read' : ''}`} viewBox="0 0 18 12" width="16" height="11" aria-label={status}>
-      <path d={double ? 'M1 6.500 4.500 10 11 2.500M7 10l6.500-7.500' : 'M3 6.500 6.500 10 14 2.500'} fill="none" stroke="currentColor" strokeWidth="1.600" strokeLinecap="round" strokeLinejoin="round" />
+    <svg className={`tick ${status === 'read' ? 'tick--read' : ''}`} viewBox="0 0 20 12" width="19" height="12" role="img" aria-label={titles[status]}>
+      <title>{titles[status]}</title>
+      <g fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M1.5 6.5 5 10 11.500 2.500" />
+        {double && <path d="M7.500 8.500 8.500 10 15 2.500" />}
+      </g>
     </svg>
   )
 }
